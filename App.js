@@ -7,7 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {post} from './src/utils/request';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -17,11 +18,16 @@ const instructions = Platform.select({
 });
 
 type Props = {};
+const url = 'http://172.16.9.47:9977/opms/webservice/ApplicationController/findLc';
 export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
+        <TouchableOpacity
+          onPress={() => post(url)}
+        >
+          <Text>request data</Text>
+        </TouchableOpacity>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
