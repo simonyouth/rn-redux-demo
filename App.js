@@ -1,55 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React from 'react';
+import { createBottomTabNavigator } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Outpatient from './src/pages/Outpatient';
+import Home from './src/pages/Home';
+import Department from './src/pages/Department';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {post} from './src/utils/request';
+export default createBottomTabNavigator({
+  Home: {
+  	screen: Home,
+	},
+  Patient: {
+  	screen: Outpatient,
+	},
+	Depart: {
+  	screen: Department,
+	}
+}, {
+	navigationOptions: ({ navigation }) => ({
+		tabBarIcon: ({ focused, horizontal, tintColor }) => {
+			const { routeName } = navigation.state;
+			let iconName;
+			if (routeName === 'Home') {
+				iconName = `layers${focused ? '' : '-outline'}`;
+			} else if (routeName === 'Patient') {
+				iconName = `account-minus${focused ? '' : '-outline'}`;
+			} else if (routeName === 'Depart') {
+				iconName = `magnify-minus${focused ? '' : '-outline'}`;
+			}
+			
+			// You can return any component that you like here! We usually use an
+			// icon component from react-native-vector-icons
+			return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+		},
+	}),
+	tabBarOptions: {
+		activeTintColor: 'tomato',
+		inactiveTintColor: 'gray',
+	},
+})
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
-const url = 'http://172.16.9.47:9977/opms/webservice/ApplicationController/findLc';
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => post(url)}
-        >
-          <Text>request data</Text>
-        </TouchableOpacity>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
