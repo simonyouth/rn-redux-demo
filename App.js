@@ -1,19 +1,21 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
+import store from './src/store/store';
 import Outpatient from './src/pages/Outpatient';
 import Home from './src/pages/Home';
 import Department from './src/pages/Department';
 
-export default createBottomTabNavigator({
-  Home: {
-  	screen: Home,
+const BottomNavigator = createBottomTabNavigator({
+	Home: {
+		screen: Home,
 	},
-  Patient: {
-  	screen: Outpatient,
+	Patient: {
+		screen: Outpatient,
 	},
 	Depart: {
-  	screen: Department,
+		screen: Department,
 	}
 }, {
 	navigationOptions: ({ navigation }) => ({
@@ -37,5 +39,15 @@ export default createBottomTabNavigator({
 		activeTintColor: 'tomato',
 		inactiveTintColor: 'gray',
 	},
-})
+});
+
+export default class App extends React.Component{
+	render() {
+		return (
+			<Provider store={store}>
+				<BottomNavigator/>
+			</Provider>
+		)
+	}
+}
 

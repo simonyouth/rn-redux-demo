@@ -3,6 +3,6 @@ export function post(url, params = {}) {
 		method: 'POST',
 		// body: JSON.stringify(params)
 	}).then(response => response.json())
-		.then(responseJson => console.log(responseJson))
+		.then(responseJson => responseJson)
 		.catch(err => console.log(err))
 }
