@@ -3,10 +3,10 @@ const initialState = {
 };
 
 function todoApp(state = initialState, action) {
-	if (action.type === 'FETCH_SUCCESS') {
-		const { sub } = action;
-		return { ...state, response: 'Ok! You did it!', sub }
-	}
+	// console.log(action.type)
+		const { payload } = action;
+		return { ...state, response: 'Ok! You did it!', payload }
+	
 }
 
 export default todoApp

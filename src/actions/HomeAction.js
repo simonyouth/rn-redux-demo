@@ -1,4 +1,8 @@
+import { post } from '../utils/request';
+
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_FAIL = 'FETCH_FAIL';
+export const FETCH_LOADING = 'FETCH_LOADING';
 
 export function select(sub) {
 	return {
@@ -7,33 +11,31 @@ export function select(sub) {
 	}
 }
 
+function save(type, payload) {
+	return {
+		type: type,
+		sub: payload
+	}
+}
 export const UPDATE_DATA = 'UPDATE_DATA';
 
-export function update(sub) {
+export function update(payload) {
 	return {
 		type: UPDATE_DATA,
-		sub,
+		payload: payload,
 	}
 }
 
-export const REQUEST_POSTS = 'REQUEST_POSTS';
-
-export function requestPosts(sub) {
-	return {
-		type: REQUEST_POSTS,
-		sub,
-	}
-}
-
-// 收到请求
-export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-
-export function receivePosts(sub, json) {
-	return {
-		type: RECEIVE_POSTS,
-		sub,
-		posts: json.data,
-		receiveAt: Date.now(),
+export function requestPosts(url) {
+	return dispatch => {
+		dispatch(save(FETCH_LOADING));
+		return post(url)
+			.then(function(response) {
+				return response.json();
+			})
+			.then(function(myJson) {
+				dispatch(save(FETCH_SUCCESS, JSON.stringify(myJson)));
+			});
 	}
 }
 

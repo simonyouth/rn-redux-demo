@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
-import { select } from '../../actions/HomeAction';
+import { requestPosts } from '../../actions/HomeAction';
+import HomeTable from './HomeTable';
+import { TEST } from '../../constants/API';
 
 class Home extends Component{
 	render() {
-		this.props.dispatch(select('may be just test'));
+		this.props.dispatch(requestPosts(TEST));
 		console.log(this.props);
 		return (
 				<View>
 					<Text>{this.props.response}</Text>
+					<HomeTable/>
 				</View>
 		)
 	}

@@ -1,13 +1,16 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 import todosApp from '../reducers/HomeReducer';
-import { select } from '../actions/HomeAction';
 
-const store = createStore(todosApp);
+const loggerMiddleware = createLogger()
 
-// console.log(store.getState());
-// const unsub = store.subscribe(() => console.log(store.getState()));
-//
-// store.dispatch(select('am I success?'));
-//
-// unsub();
+const store = createStore(
+	todosApp,
+	applyMiddleware(
+		thunkMiddleware,
+		loggerMiddleware
+	)
+);
+
 export default store;
