@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native'
+import Echarts from 'native-echarts';
 
 export default class HomeTable extends React.Component {
 	render() {
+		const options = this.props;
 		return (
-			<View>
-				<Text>HomeTable</Text>
-			</View>
+			<Echarts option={options}/>
 		)
 	}
 }

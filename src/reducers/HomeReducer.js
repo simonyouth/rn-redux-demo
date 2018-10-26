@@ -1,12 +1,23 @@
+import {
+	FETCH_FAIL,
+	FETCH_SUCCESS,
+	FETCH_LOADING,
+} from "../actions/HomeAction";
+
 const initialState = {
 	todos: 'this is init',
 };
 
-function todoApp(state = initialState, action) {
-	// console.log(action.type)
-		const { payload } = action;
-		return { ...state, response: 'Ok! You did it!', payload }
-	
+function getData(state = initialState, action) {
+	const { type, payload = {} } = action;
+	switch (type) {
+		case FETCH_LOADING:
+			return { loading: true };
+		case FETCH_FAIL:
+			return { loading: false };
+		case FETCH_SUCCESS:
+			return { payload, loading: false };
+	}
 }
 
-export default todoApp
+export default getData

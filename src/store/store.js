@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import todosApp from '../reducers/HomeReducer';
+import getData from '../reducers/HomeReducer';
 
 const loggerMiddleware = createLogger()
 
 const store = createStore(
-	todosApp,
+	getData,
 	applyMiddleware(
 		thunkMiddleware,
 		loggerMiddleware
