@@ -32,7 +32,7 @@ export function requestPosts(url) {
 			.then(response => response.json(),
 				error => dispatch(failed(error.message)))
 			.then(myJson => {
-				const { data } = myJson.home;
+				const { data } = myJson.response;
 				dispatch(receiveData(data));
 			})
 		
