@@ -23,8 +23,8 @@ class Home extends Component{
 		console.log(this.props);
 		return (
 				<View>
-					{/*<Text>{this.props.loading}</Text>*/}
-					<HomeTable/>
+					<Text>{this.props.loading}</Text>
+					{/*<HomeTable/>*/}
 				</View>
 		)
 	}
