@@ -16,7 +16,7 @@ function getData(state = initialState, action) {
 		case FETCH_FAIL:
 			return { loading: false, type };
 		case FETCH_SUCCESS:
-			return { payload, loading: false, type };
+			return { ...payload, loading: false, type };
 	}
 }
 
