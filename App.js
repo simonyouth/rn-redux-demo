@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
 import store from './src/store/store';
@@ -7,15 +7,42 @@ import Outpatient from './src/pages/Outpatient';
 import Home from './src/pages/Home';
 import Department from './src/pages/Department';
 
+const HomeStack = createStackNavigator({
+	Profile: {
+		screen: Home,
+		navigationOptions: () => ({
+			title: `Home`,
+		}),
+	}
+});
+
+const PatientStack = createStackNavigator({
+	Profile: {
+		screen: Outpatient,
+		navigationOptions: () => ({
+			title: 'Patient',
+		})
+	}
+});
+
+const DepartStack = createStackNavigator({
+	Profile: {
+		screen: Department,
+		navigationOptions: () => ({
+			title: 'Depart',
+		})
+	}
+});
+
 const BottomNavigator = createBottomTabNavigator({
 	Home: {
-		screen: Home,
+		screen: HomeStack,
 	},
 	Patient: {
-		screen: Outpatient,
+		screen: PatientStack,
 	},
 	Depart: {
-		screen: Department,
+		screen: DepartStack,
 	}
 }, {
 	navigationOptions: ({ navigation }) => ({
@@ -29,7 +56,7 @@ const BottomNavigator = createBottomTabNavigator({
 			} else if (routeName === 'Depart') {
 				iconName = `magnify-minus${focused ? '' : '-outline'}`;
 			}
-			
+
 			// You can return any component that you like here! We usually use an
 			// icon component from react-native-vector-icons
 			return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
