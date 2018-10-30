@@ -7,6 +7,7 @@ import { HOME } from '../../constants/API';
 import {
 	FETCH_FAIL,
 } from '../../actions/HomeAction';
+import Result from '../../components/Result';
 
 class Home extends Component{
 	componentDidMount() {
@@ -33,10 +34,10 @@ class Home extends Component{
 			)
 		}  else {
 			return (
-				<View>
+				<Result {...this.props}>
 					<Text>ok,get</Text>
 					<HomeTable />
-				</View>
+				</Result>
 			)
 		}
 	};

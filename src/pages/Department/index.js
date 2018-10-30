@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import DepartPie from './DepartPie';
+import Result from '../../components/Result';
 
-export default class Department extends Component{
+class Department extends Component{
 	render() {
+		const { depart } = this.props;
 		return (
-			<View>
-				<Text>Department</Text>
-			</View>
+			<Result {...this.props}>
+				<DepartPie data={depart} />
+			</Result>
 		)
 	}
 }
+
+const mapStateToProps = (state) => {
+	return { ...state }
+};
+
+export default connect(mapStateToProps)(Department)
