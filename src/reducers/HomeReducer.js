@@ -8,7 +8,7 @@ const initialState = {
 	todos: 'this is init',
 };
 
-function getData(state = initialState, action) {
+function getHomeData(state = initialState, action) {
 	const { type, payload = {} } = action;
 	switch (type) {
 		case FETCH_LOADING:
@@ -17,7 +17,9 @@ function getData(state = initialState, action) {
 			return { loading: false, type };
 		case FETCH_SUCCESS:
 			return { ...payload, loading: false, type };
+		default:
+			return {...state}
 	}
 }
 
-export default getData
+export default getHomeData

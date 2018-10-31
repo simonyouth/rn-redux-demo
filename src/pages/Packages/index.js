@@ -2,8 +2,13 @@ import React, {Component} from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
 import Result from '../../components/Result';
+import { requestPosts } from '../../actions/PackagesAction';
+import { PACKAGES } from '../../constants/API';
 
 class Department extends Component{
+	componentDidMount() {
+		this.props.dispatch(requestPosts(PACKAGES))
+	}
 	
 	onPress = (url) => {
 		this.props.navigation.navigate('Details', {
@@ -12,6 +17,7 @@ class Department extends Component{
 	}
 	
 	render() {
+		const { packages } = this.props;
 		return (
 			<View>
 				<TouchableOpacity
@@ -25,7 +31,7 @@ class Department extends Component{
 }
 
 const mapStateToProps = (state) => {
-	return { ...state }
+	return { ...state.getPackages }
 };
 
 export default connect(mapStateToProps)(Department)

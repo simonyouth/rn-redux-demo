@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
 import store from './src/store/store';
 import Outpatient from './src/pages/Outpatient';
 import Home from './src/pages/Home';
-import Department from './src/pages/Department';
+import Department from './src/pages/Packages';
 import Details from './src/pages/Webview';
 
 const HomeStack = createStackNavigator({
