@@ -6,6 +6,7 @@ import store from './src/store/store';
 import Outpatient from './src/pages/Outpatient';
 import Home from './src/pages/Home';
 import Department from './src/pages/Department';
+import Details from './src/pages/Webview';
 
 const HomeStack = createStackNavigator({
 	Profile: {
@@ -30,6 +31,12 @@ const DepartStack = createStackNavigator({
 		screen: Department,
 		navigationOptions: () => ({
 			title: 'Depart',
+		})
+	},
+	Details: {
+		screen: Details,
+		navigationOptions: () => ({
+			header: null
 		})
 	}
 });
