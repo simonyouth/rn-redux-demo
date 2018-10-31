@@ -5,7 +5,9 @@ import {
 } from "../actions/HomeAction";
 
 const initialState = {
-	todos: 'this is init',
+	// line: [],
+	// patient: [],
+	// depart: [],
 };
 
 function getHomeData(state = initialState, action) {
@@ -14,7 +16,7 @@ function getHomeData(state = initialState, action) {
 		case FETCH_LOADING:
 			return { loading: true };
 		case FETCH_FAIL:
-			return { loading: false, type };
+			return { loading: false, type, ...state };
 		case FETCH_SUCCESS:
 			return { ...payload, loading: false, type };
 		default:

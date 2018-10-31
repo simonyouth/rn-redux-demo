@@ -20,11 +20,11 @@ function receiveData(payload) {
 export function requestPosts(url) {
 	return dispatch => {
 		return post(url)
-			.then(response => response.json(),
-				error => dispatch(failed(error.message)))
+			.then(response => response.json())
 			.then(myJson => {
 				const { data } = myJson;
 				dispatch(receiveData(data));
 			})
+			.catch(error => dispatch(failed(error.message)))
 	}
 }
