@@ -36,7 +36,8 @@ const DepartStack = createStackNavigator({
 	Details: {
 		screen: Details,
 		navigationOptions: () => ({
-			header: null
+			header: null,
+			gesturesEnabled: true,
 		})
 	}
 });
