@@ -5,6 +5,7 @@ import HomeLine from './HomeLine';
 import { HOME } from '../../constants/API';
 import Result from '../../components/Result';
 import DepartPie from './DepartPie';
+import HomeBar from './HomeBar';
 
 export default class Home extends Component{
 	state = {
@@ -36,6 +37,12 @@ export default class Home extends Component{
 						onRefresh={this._onRefresh}/>
 				}>
 				<Result {...this.props}>
+					
+					<View style={styles.item}>
+						<Text>Bar Chart</Text>
+						<HomeBar data={depart}/>
+					</View>
+					
 					<View style={styles.item}>
 						<Text>Home Table</Text>
 						<HomeLine data={line}/>

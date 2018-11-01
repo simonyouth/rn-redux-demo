@@ -35,17 +35,22 @@ class Department extends Component{
 	
 	render() {
 		const { packages } = this.props;
-		console.log(this.props)
 		return (
-			<FlatList
-				renderItem={this.renderItem}
-				data={packages}
-				initialNumToRender={6}/>
+			<View style={styles.container}>
+				<FlatList
+					renderItem={this.renderItem}
+					data={packages}
+					initialNumToRender={6}/>
+			</View>
 		)
 	}
 }
 
 const styles = StyleSheet.create({
+	container: {
+		marginTop: 10,
+		marginBottom: 10,
+	},
 	itemContainer: {
 		flex: 1,
 		marginLeft: 5,

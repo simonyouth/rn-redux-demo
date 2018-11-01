@@ -14,9 +14,9 @@ function getHomeData(state = initialState, action) {
 	const { type, payload = {} } = action;
 	switch (type) {
 		case FETCH_LOADING:
-			return { loading: true };
+			return { loading: true, type};
 		case FETCH_FAIL:
-			return { loading: false, type, ...state };
+			return { loading: false, type };
 		case FETCH_SUCCESS:
 			return { ...payload, loading: false, type };
 		default:
