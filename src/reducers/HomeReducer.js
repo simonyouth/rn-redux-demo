@@ -5,19 +5,23 @@ import {
 } from "../actions/HomeAction";
 
 const initialState = {
-	todos: 'this is init',
+	// line: [],
+	// patient: [],
+	// depart: [],
 };
 
-function getData(state = initialState, action) {
+function getHomeData(state = initialState, action) {
 	const { type, payload = {} } = action;
 	switch (type) {
 		case FETCH_LOADING:
-			return { loading: true };
+			return { loading: true, type};
 		case FETCH_FAIL:
 			return { loading: false, type };
 		case FETCH_SUCCESS:
-			return { payload, loading: false, type };
+			return { ...payload, loading: false, type };
+		default:
+			return {...state}
 	}
 }
 
-export default getData
+export default getHomeData

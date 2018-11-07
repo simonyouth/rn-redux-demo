@@ -30,11 +30,12 @@ export function requestPosts(url) {
 		dispatch(requestData());
 		return post(url)
 			.then(response => response.json(),
-				error => dispatch(failed(error.message)))
+				)
 			.then(myJson => {
-				const { data } = myJson.response;
+				const { data } = myJson;
 				dispatch(receiveData(data));
 			})
+			.catch(error => dispatch(failed(error.message)))
 		
 	}
 }
