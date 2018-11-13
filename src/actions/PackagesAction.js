@@ -17,13 +17,13 @@ function receiveData(payload) {
 	}
 }
 
-export function requestPosts(url) {
+export function requestPosts(url, params) {
 	return dispatch => {
-		return post(url)
+		return post(url, params)
 			.then(response => response.json())
 			.then(myJson => {
-				const { data } = myJson;
-				dispatch(receiveData(data));
+				console.log(myJson)
+				dispatch(receiveData(myJson.result));
 			})
 			.catch(error => dispatch(failed(error.message)))
 	}

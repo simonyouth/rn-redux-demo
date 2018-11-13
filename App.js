@@ -3,9 +3,9 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import { Provider } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
 import store from './src/store/store';
-import Outpatient from './src/pages/Outpatient';
+import Express from './src/pages/Express';
 import Home from './src/pages/Home';
-import Department from './src/pages/Packages';
+import Packages from './src/pages/Packages';
 import Details from './src/pages/Webview';
 
 const HomeStack = createStackNavigator({
@@ -17,18 +17,18 @@ const HomeStack = createStackNavigator({
 	}
 });
 
-const PatientStack = createStackNavigator({
+const ExpressStack = createStackNavigator({
 	Profile: {
-		screen: Outpatient,
+		screen: Express,
 		navigationOptions: () => ({
 			title: 'Patient',
 		})
 	}
 });
 
-const DepartStack = createStackNavigator({
+const PackagesStack = createStackNavigator({
 	Profile: {
-		screen: Department,
+		screen: Packages,
 		navigationOptions: () => ({
 			title: 'Depart',
 		})
@@ -46,11 +46,11 @@ const BottomNavigator = createBottomTabNavigator({
 	Home: {
 		screen: HomeStack,
 	},
-	Patient: {
-		screen: PatientStack,
+	Express: {
+		screen: ExpressStack,
 	},
 	Depart: {
-		screen: DepartStack,
+		screen: PackagesStack,
 	}
 }, {
 	navigationOptions: ({ navigation }) => ({
@@ -59,7 +59,7 @@ const BottomNavigator = createBottomTabNavigator({
 			let iconName;
 			if (routeName === 'Home') {
 				iconName = `layers${focused ? '' : '-outline'}`;
-			} else if (routeName === 'Patient') {
+			} else if (routeName === 'Express') {
 				iconName = `account-minus${focused ? '' : '-outline'}`;
 			} else if (routeName === 'Depart') {
 				iconName = `magnify-minus${focused ? '' : '-outline'}`;
