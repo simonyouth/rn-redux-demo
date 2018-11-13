@@ -9,9 +9,8 @@ import {
 import { connect } from 'react-redux';
 import Result from '../../components/Result';
 import { requestPosts } from '../../actions/PackagesAction';
-import { KUAIDI, KEY, PACKAGES } from '../../constants/API';
+import { PACKAGES } from '../../constants/API';
 
-const params = {key: KEY, com: 'yt', no: '802644146871524466'};
 class Department extends Component{
 	componentDidMount() {
 		this.props.dispatch(requestPosts(PACKAGES))
