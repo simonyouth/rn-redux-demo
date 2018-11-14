@@ -1,7 +1,7 @@
 import { post } from '../utils/request';
 
-export const EXPRESS_SUCCESS = 'PATIENT_SUCCESS';
-export const EXPRESS_FAILED = 'PATIENT_FAILED';
+export const EXPRESS_SUCCESS = 'EXPRESS_SUCCESS';
+export const EXPRESS_FAILED = 'EXPRESS_FAILED';
 
 function failed(error) {
     return {
@@ -23,7 +23,12 @@ export function requestPosts(url, params) {
             .then(response => response.json())
             .then(myJson => {
                 console.log(myJson)
-                dispatch(receiveData(myJson.result));
+                const { resultcode, result } = myJson;
+                if (resultcode !== '200') {
+                    dispatch(failed(myJson))
+                } else {
+                    dispatch(receiveData(result));
+                }
             })
             .catch(error => dispatch(failed(error.message)))
     }

@@ -7,37 +7,66 @@ import {
 	StyleSheet,
 	Image,
 	TouchableOpacity,
+	FlatList,
+	Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Result from '../../components/Result';
 import ColorfulItem from './ColorfulItem';
 import StyledButton from '../../components/StyledButton';
 import Input from './Input';
-import { requestPosts } from '../../actions/ExpressAction';
+import { requestPosts, EXPRESS_SUCCESS } from '../../actions/ExpressAction';
 import { KUAIDI, KEY } from '../../constants/API';
 
 const { width, height } = Dimensions.get('window');
-const params = {key: KEY, com: 'yd', no: '3909903733458'};
+const params = {key: KEY, com: 'yd', no: '390990373345b'};
 class Express extends Component {
     state = {
         modalVisible: false,
+		company: '',
+		number: '',
     };
 
     setModalVisible = () =>  {
-        this.setState({
-			modalVisible: !this.state.modalVisible
-        });
-    }
+    	const _self = this;
+    	const params = {
+    		key: KEY,
+			com: this.state.company,
+			no: this.state.number,
+		};
+    	console.log(this.state)
+    	async function getDate() {
+			await _self.props.dispatch(requestPosts(KUAIDI, params));
+            const { type, reason = '输入有误' } = _self.props;
+            if (type !== EXPRESS_SUCCESS) {
+                Alert.alert(reason)
+            } else {
+                _self.setState({
+                    modalVisible: !_self.state.modalVisible
+                });
+            }
+        }
+        getDate();
+    };
 
-	componentDidMount() {
-		// this.props.dispatch(requestPosts(KUAIDI, params))
-	}
+    setCompany = (company) => {
+    	this.setState({ company })
+	};
+
+    setNumber = (number) => {
+    	this.setState({ number })
+	};
 
 	render() {
 		const inputOptions = {
 			nameHolder: '快递公司首字母全拼',
 			numHolder: '运单号',
+			onChangeCompany: this.setCompany,
+			onChangeNumber: this.setNumber,
 		};
+		let { list = [], company, no } = this.props;
+		console.log(this.props)
+		list = list.reverse();
+
 		return (
 			<View style={styles.container}>
 				<Input {...inputOptions}/>
@@ -51,7 +80,10 @@ class Express extends Component {
                     onRequestClose={this.setModalVisible}>
 					<View style={styles.outerModal}>
 						<View style={styles.innerModal}>
-							<ColorfulItem />
+							<Text>{company}：{no}</Text>
+							<FlatList
+								renderItem={({item}) => (<ColorfulItem item={item}/>)}
+								data={list}/>
 							<TouchableOpacity
                                 style={styles.imgContainer}
 								onPress={this.setModalVisible}>
@@ -77,24 +109,27 @@ const styles = StyleSheet.create({
 	},
     outerModal: {
 		flex: 1,
-        padding: 40,
+        padding: 30,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)'
 	},
     innerModal: {
-		width: 0.8 * width,
+		padding: 18,
+		width: 0.9 * width,
 		height: 0.7 * height,
 		backgroundColor: '#fff',
+		borderRadius: 10,
 	},
 	img: {
-		width: 35,
-		height: 35,
+		width: 40,
+		height: 40,
 	},
 	imgContainer: {
         position: 'absolute',
-        top: -15,
-        right: -15,
+        bottom: 0,
+        left: '50%',
+		right: '50%'
 	}
 });
 

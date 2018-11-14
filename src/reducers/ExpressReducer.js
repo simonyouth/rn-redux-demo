@@ -11,9 +11,9 @@ function getExpressData(state = initialState, action) {
     const { type, payload = {} } = action;
     switch (type) {
         case EXPRESS_FAILED:
-            return { loading: false, type };
         case EXPRESS_SUCCESS:
             return { ...payload, loading: false, type };
+            break;
         default:
             return {...state}
     }

@@ -21,7 +21,7 @@ const ExpressStack = createStackNavigator({
 	Profile: {
 		screen: Express,
 		navigationOptions: () => ({
-			title: 'Patient',
+			title: 'Express',
 		})
 	}
 });
@@ -30,7 +30,7 @@ const PackagesStack = createStackNavigator({
 	Profile: {
 		screen: Packages,
 		navigationOptions: () => ({
-			title: 'Depart',
+			title: 'Packages',
 		})
 	},
 	Details: {
@@ -49,7 +49,7 @@ const BottomNavigator = createBottomTabNavigator({
 	Express: {
 		screen: ExpressStack,
 	},
-	Depart: {
+	Packages: {
 		screen: PackagesStack,
 	}
 }, {
@@ -61,7 +61,7 @@ const BottomNavigator = createBottomTabNavigator({
 				iconName = `layers${focused ? '' : '-outline'}`;
 			} else if (routeName === 'Express') {
 				iconName = `account-minus${focused ? '' : '-outline'}`;
-			} else if (routeName === 'Depart') {
+			} else if (routeName === 'Packages') {
 				iconName = `magnify-minus${focused ? '' : '-outline'}`;
 			}
 

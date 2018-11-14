@@ -5,18 +5,20 @@ const {height, width} = Dimensions.get('window');
 const inputWidth = width - 100;
 
 export default function (props) {
-    const { style, onPress, children, nameHolder, numHolder } = props;
+    const { onChangeCompany, nameHolder, numHolder, onChangeNumber } = props;
     return(
         <View style={styles.container}>
             <View style={styles.inputCage}>
                 <Text style={styles.text}>快递名称：</Text>
                 <TextInput
+                    onChangeText={onChangeCompany}
                     style={styles.input}
                     placeholder={nameHolder}/>
             </View>
             <View style={styles.inputCage}>
                 <Text style={styles.text}>运单号：</Text>
                 <TextInput
+                    onChangeText={onChangeNumber}
                     style={styles.input}
                     placeholder={numHolder}/>
             </View>
